@@ -50,17 +50,8 @@ const char *get_password()
 
 int set_encrypt_login(char* login)
 {
-    memset(user_encrypt_login, 0, STR_LENGTH_MAX);
-    if (strlen(login) <= STR_LENGTH_MAX)
-    {
-        strcpy(user_encrypt_login, login);
-        return 0;
-    }
-    else
-    {
-        print_messages[ER_LOGIN_MAX_LENGTH]();
-        return -1;
-    }
+    memcpy(user_encrypt_login, login, STR_LENGTH_MAX);
+    return 0;
 }
 
 const char *get_encrypt_login()
@@ -70,18 +61,8 @@ const char *get_encrypt_login()
 
 int set_encrypt_password(char* password)
 {
-    memset(user_encrypt_password, 0, STR_LENGTH_MAX);
-    if (strlen(password) <= STR_LENGTH_MAX)
-    {
-        strcpy(user_encrypt_password, password);
-        return 0;
-    }
-    else
-    {
-        print_messages[ER_PASSWORD_MAX_LENGTH]();
-        return -1;
-    }
-
+    memcpy(user_encrypt_password, password, STR_LENGTH_MAX);
+    return 0;
 }
 const char *get_encrypt_password()
 {
