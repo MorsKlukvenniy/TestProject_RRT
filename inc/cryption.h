@@ -12,7 +12,7 @@ typedef enum key_length
 
 
 void aes_init(key_length k_len);
-void aes_encrypt (char * str_in, char * str_out, int len);
-void aes_decrypt (char * str_in, char * str_out, int len);
+void aes_encrypt(const char *str_in, char * str_out, int len);
+void aes_decrypt(const char * str_in, char * str_out, int len);
 
 #endif //CRYPTION_H

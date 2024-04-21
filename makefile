@@ -1,13 +1,13 @@
 # The project name
 export PROJECTNAME = AESCrypt
-SOURCE_DIR = .
-HEADERS_DIR = ../inc
-BUILD_DIR  = ../objects
-RESULT_DIR = ../result
+SOURCE_DIR = src/
+HEADERS_DIR = inc/
+BUILD_DIR  = objects/
+RESULT_DIR = result/
 
-SOURCE += main.c
-SOURCE += cryption.c
-SOURCE += usermessages.c
+SOURCE += $(SOURCE_DIR)/main.c
+SOURCE += $(SOURCE_DIR)/cryption.c
+SOURCE += $(SOURCE_DIR)/usermessages.c
 
 INCLUDE += -I$(SOURCE_DIR) 
 INCLUDE += -I$(HEADERS_DIR)

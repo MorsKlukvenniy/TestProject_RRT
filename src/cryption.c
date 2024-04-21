@@ -26,14 +26,12 @@ void aes_init(key_length k_len)
         break;
     }
     uint8_t key[l];
-    uint8_t iv[l];
     int i = 0;
     for (i = 0; i < l; i++)
     {
         int r = rand();
         key[i] = ((r & 0xff) + ((r >> 8) & 0xff) + ((r >> 16) & 0xff) + ((r >> 24) & 0xff)) & 0xff;
         r = rand();
-        iv[i] = (((r & 0xff) + ((r >> 8) & 0xff) - ((r >> 16) & 0xff) + ((r >> 24) & 0xff)) + i) & 0xff;
     }
     gcryError = gcry_cipher_open(&crypt_desc, GCRY_CIPHER_AES + k_len, GCRY_CIPHER_MODE_ECB, 0);
 
@@ -50,17 +48,9 @@ void aes_init(key_length k_len)
            gcry_strsource(gcryError), gcry_strerror(gcryError));
         return;
     }
-
-    gcryError = gcry_cipher_setiv(crypt_desc, key, l);
-
-    if (gcryError) {
-        printf("gcry_cipher_setiv failed:  %s/%s\n",
-           gcry_strsource(gcryError), gcry_strerror(gcryError));
-        return;
-    }
 }
 
-void aes_encrypt (char * str_in, char * str_out, int len)
+void aes_encrypt(const char * str_in, char * str_out, int len)
 {
     gcryError = gcry_cipher_encrypt(crypt_desc, str_out, len, str_in, len);
     if (gcryError) {
@@ -70,7 +60,7 @@ void aes_encrypt (char * str_in, char * str_out, int len)
     }
 }
 
-void aes_decrypt (char * str_in, char * str_out, int len)
+void aes_decrypt(const char *str_in, char * str_out, int len)
 {
     gcryError = gcry_cipher_decrypt(crypt_desc, str_out, len, str_in, len);
     if (gcryError) {
